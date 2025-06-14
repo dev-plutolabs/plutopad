@@ -2,7 +2,7 @@
 
 **ESP32/Arduino library for communicating with a PlutoPAD, allowing users to easily integrate the wireless controller into their own projects.** 
 
-PlutoPAD library manages all PlutoPAD states using a compact packet structure and provides user-defined callbacks for button events, connections, and disconnections. Ideal for robotics and embedded projects (like PlutoBUG), it offers a simple and reliable wireless control interface.
+PlutoPAD library manages all PlutoPAD states using a compact packet structure and provides user-defined callbacks for button events, connections, and disconnections. Ideal for robotics and embedded projects (like PlutoBUG), it offers a simple and reliable control interface for your PlutoPAD controller.
 
 ---
 
