@@ -48,6 +48,7 @@ PlutoPAD library manages all PlutoPAD states using a compact packet structure an
 
 PlutoPAD PlutoPad;
 
+// Function callback when any button state changes on the PlutoPAD
 void onButtonChange()
 {
   if (PlutoPad.button.centre_b_pressed())
@@ -56,11 +57,13 @@ void onButtonChange()
   }
 }
 
+// Function callback when the PlutoPAD connects
 void onConnect()
 {
   Serial.println("PlutoPAD connected.");
 }
 
+// Function callback when the PlutoPAD disconnects
 void onDisconnect()
 {
   Serial.println("PlutoPAD disconnected.");
@@ -77,8 +80,9 @@ void setup()
 
 void loop()
 {
-  PlutoPad.run();
+  PlutoPad.run(); // Run PlutoPAD...
 }
+
 ```
 ---
 
@@ -100,6 +104,7 @@ Serial.println(PlutoPad.getButtonName(0)); // Prints "Centre B"
 if (PlutoPad.button.centre_b_pressed())
 {
   // React to Centre B press
+  // do things....
 }
 ```
 
