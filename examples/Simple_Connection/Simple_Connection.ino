@@ -1,5 +1,5 @@
 /**
- * Example sketch for using PlutoPAD controller library with a wireless ESP32 or Arduino device.
+ * Example sketch for using PlutoPAD.h controller library with a wireless ESP32 or Arduino device.
  * 
  * This sketch demonstrates how to use the PlutoPAD.h library to connect to a PlutoPAD controller,
  * manage button states, and respond to user input.
@@ -39,9 +39,9 @@ void loop()
     plutoPAD.run();
 
     // Example of checking a specific button state
-    if (plutoPAD.button.r1_pressed()) // Check if R1 button is pressed
+    if (plutoPAD.button.centre_b_pressed()) // Check if centre_b button is pressed
     {
-        Serial.println("@MyWirelessDevice: R1 button pressed!");
+        Serial.println("@MyWirelessDevice: Centre B button pressed!");
     }
 }
 

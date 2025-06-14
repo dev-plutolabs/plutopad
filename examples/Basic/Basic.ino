@@ -1,5 +1,5 @@
 /**
- * Example framework sketch for using PlutoPAD controller library.
+ * Example framework sketch for using PlutoPAD.h controller library.
  * 
  * This sketch demonstrates gives the user an empty sketch framework of the typical use of the PlutoPAD controller library.
  * 
@@ -18,6 +18,7 @@ void onDisconnect(void);
 void setup() 
 {
     Serial.begin(115200);
+    
     // Start PlutoPAD and register event callbacks
     plutoPAD.begin("Device");
     plutoPAD.linkOnChange(onButtonChange);
