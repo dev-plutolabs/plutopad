@@ -113,5 +113,5 @@ if (PlutoPad.button.centre_b_pressed())
 ## 🧪 Debug Mode
 **Enable serial debug output by passing `true` as the second argument to `begin()`:**
 ```cpp
-PlutoPad.begin("MyBluetoothProject", true);
+PlutoPad.begin("MyBluetoothProject", true); // Enables debugging mode
 ```
