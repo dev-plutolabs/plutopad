@@ -76,7 +76,7 @@ void loop() {
 ---
 
 ## 🎮 Button Layout
-** PlutoPAD button states are stored in a 16-bit packet in the following order: **
+**PlutoPAD button states are stored in a 16-bit packet in the following order:**
 ```cpp
 ["Centre B", "Down B", "Left B", "Middle B", "Right B", "Up B", 
  "R1", "R2", "L2", "L1", 
