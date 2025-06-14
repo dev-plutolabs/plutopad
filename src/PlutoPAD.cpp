@@ -14,8 +14,8 @@
  * @author  
  * Peter Kyriakides
  *
- * @version 1.0
- * @date    14-06-2025
+ * @version 0.1.1
+ * @date    15-06-2025
  * 
  * @note Subject to the GNU General Public License v3.0 (GPL-3.0).
  */
@@ -97,15 +97,6 @@ void PlutoPAD::resetButtons()
     memset(&button, 0, sizeof(button)); // Reset all button states to false
 }
 
-// Function to update button state based on command and isPressed
-void PlutoPAD::updateButtonState(int buttonIndex, bool isPressed) 
-{
-    if (buttonIndex >= 0 && buttonIndex < 16) 
-    {
-        bool* buttonArray = reinterpret_cast<bool*>(&button); // Treat struct as an array
-        buttonArray[buttonIndex] = isPressed;
-    }
-}
 
 // Function to run PlutoPAD system
 // - Checks connection status
@@ -137,23 +128,30 @@ void PlutoPAD::checkConnection(void)
 // - If input is available, read and update button states
 void PlutoPAD::handleInput() 
 {
-    if (client_isConnected && serialBluetooth.available() >= 2) // Expecting 2 bytes
+    // Exit function if no client or new bluetooth available
+    if (!client_isConnected || serialBluetooth.available() < 2)  
+        return;
+
+    // 1) read the 2‑byte packet once
+    uint16_t newRaw = 0;
+    serialBluetooth.readBytes((uint8_t*)&newRaw, sizeof(newRaw));
+
+    // 2) stash the old value
+    uint16_t oldRaw = button.raw;
+
+    // 3) update the raw bits once
+    button.raw = newRaw;
+
+    // 4) for each bit that changed, update the bool and fire the callback
+    for (int i = 0; i < 16; i++) 
     {
-        uint16_t receivedPacket = 0;
-        serialBluetooth.readBytes((uint8_t*)&receivedPacket, sizeof(receivedPacket)); // Read the 2-byte packet
-
-        // Process each button state
-        for (int i = 0; i < 16; i++) 
+        bool prev = (oldRaw >> i) & 1;
+        bool curr = (newRaw >> i) & 1;
+        if (prev != curr) 
         {
-            bool currentState = (receivedPacket >> i) & 1; // Extract each button state
-            bool previousState = (button.raw >> i) & 1; // Extract previous button state
-
-            if (currentState != previousState) // Only update if state changed
-            {
-                updateButtonState(i, currentState); // Update button states
-                button.raw = receivedPacket; // Store the latest state
-                if (buttonCallback) buttonCallback(); // Call user-defined callback on state change
-            }
+            updateButtonState(i, curr);
+            if (buttonCallback) 
+                buttonCallback();
         }
     }
 }
