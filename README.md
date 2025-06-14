@@ -45,32 +45,38 @@ PlutoPAD library manages all PlutoPAD states using a compact packet structure an
 ```cpp
 #include "PlutoPAD.h"
 
-PlutoPAD controller;
+PlutoPAD PlutoPad;
 
-void onButtonChange() {
-  if (controller.button.centre_b_pressed()) {
+void onButtonChange()
+{
+  if (PlutoPad.button.centre_b_pressed())
+  {
     Serial.println("Centre B pressed!");
   }
 }
 
-void onConnect() {
+void onConnect()
+{
   Serial.println("PlutoPAD connected.");
 }
 
-void onDisconnect() {
+void onDisconnect()
+{
   Serial.println("PlutoPAD disconnected.");
 }
 
-void setup() {
+void setup()
+{
   Serial.begin(115200);
-  controller.begin("MyBluetoothProject", true); // Enable debug prints
-  controller.linkOnChange(onButtonChange);
-  controller.linkOnConnect(onConnect);
-  controller.linkOnDisconnect(onDisconnect);
+  PlutoPad.begin("MyBluetoothProject");
+  PlutoPad.linkOnChange(onButtonChange);
+  PlutoPad.linkOnConnect(onConnect);
+  PlutoPad.linkOnDisconnect(onDisconnect);
 }
 
-void loop() {
-  controller.run();
+void loop()
+{
+  PlutoPad.run();
 }
 ```
 ---
@@ -85,12 +91,12 @@ void loop() {
 
 **You can get button names by index:**
 ```cpp
-Serial.println(controller.getButtonName(0)); // Prints "Centre B"
+Serial.println(PlutoPad.getButtonName(0)); // Prints "Centre B"
 ```
 
 **Or use the built-in accessors:**
 ```cpp
-if (controller.button.centre_b_pressed())
+if (PlutoPad.button.centre_b_pressed())
 {
   // React to Centre B press
 }
@@ -101,5 +107,5 @@ if (controller.button.centre_b_pressed())
 ## 🧪 Debug Mode
 **Enable serial debug output by passing `true` as the second argument to `begin()`:**
 ```cpp
-controller.begin("MyBluetoothProject", true);
+PlutoPad.begin("MyBluetoothProject", true);
 ```
