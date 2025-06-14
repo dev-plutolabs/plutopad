@@ -1,6 +1,7 @@
 # PlutoPAD.h Library
 
-**ESP32/Arduino library for communicating with a PlutoPAD, allowing users to easily integrate the bluetooth controller into their projects.**  
+**ESP32/Arduino library for communicating with a PlutoPAD, allowing users to easily integrate the bluetooth controller into their projects.** 
+
 PlutoPAD library manages all PlutoPAD states using a compact packet structure and provides user-defined callbacks for button events, connections, and disconnections. Ideal for robotics and embedded projects (like PlutoBUG), it offers a simple and reliable wireless control interface.
 
 ---
@@ -72,4 +73,12 @@ void loop() {
   controller.run();
 }
 ```
+---
 
+## 🎮 Button Layout
+** PlutoPAD button states are stored in a 16-bit packet in the following order: **
+```cpp
+["Centre B", "Down B", "Left B", "Middle B", "Right B", "Up B", 
+ "R1", "R2", "L2", "L1", 
+ "Up A", "Right A", "Middle A", "Left A", "Down A", "Centre A"]
+```
