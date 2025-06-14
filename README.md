@@ -63,7 +63,7 @@ void onDisconnect() {
 
 void setup() {
   Serial.begin(115200);
-  controller.begin("MyESP32Device", true); // Enable debug prints
+  controller.begin("MyBluetoothProject", true); // Enable debug prints
   controller.linkOnChange(onButtonChange);
   controller.linkOnConnect(onConnect);
   controller.linkOnDisconnect(onDisconnect);
@@ -81,4 +81,25 @@ void loop() {
 ["Centre B", "Down B", "Left B", "Middle B", "Right B", "Up B", 
  "R1", "R2", "L2", "L1", 
  "Up A", "Right A", "Middle A", "Left A", "Down A", "Centre A"]
+```
+
+**You can get button names by index:**
+```cpp
+Serial.println(controller.getButtonName(0)); // Prints "Centre B"
+```
+
+**Or use the built-in accessors:**
+```cpp
+if (controller.button.centre_b_pressed())
+{
+  // React to Centre B press
+}
+```
+
+---
+
+## 🧪 Debug Mode
+**Enable serial debug output by passing `true` as the second argument to `begin()`:**
+```cpp
+controller.begin("MyBluetoothProject", true);
 ```
