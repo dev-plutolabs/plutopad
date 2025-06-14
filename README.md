@@ -8,14 +8,14 @@ PlutoPAD library manages all PlutoPAD states using a compact packet structure an
 ## 🔧 Features
 
 - Supports 16 digital buttons packed into a 2-byte data packet  
-- Automatic reconnection if the controller disconnects  
+- Automatic reconnection if the PlutoPAD disconnects  
 - User-defined callbacks for:
   - Button state changes
   - Connection events
   - Disconnection events  
 - Human-readable button name lookup  
-- Designed for ESP32 using Bluetooth Classic (SPP)  
-- Optimized for microcontroller-based robotics projects
+- Designed for ESP32 or Arduino boards using Bluetooth
+- Optimised for microcontroller-based robotics projects
 
 ---
 
@@ -34,3 +34,42 @@ PlutoPAD library manages all PlutoPAD states using a compact packet structure an
 
 ```cpp
 #include "PlutoPAD.h"
+```
+
+---
+
+## 📚 Example Usage
+
+### Basic PlutoPAD Connection
+```cpp
+#include "PlutoPAD.h"
+
+PlutoPAD controller;
+
+void onButtonChange() {
+  if (controller.button.centre_b_pressed()) {
+    Serial.println("Centre B pressed!");
+  }
+}
+
+void onConnect() {
+  Serial.println("PlutoPAD connected.");
+}
+
+void onDisconnect() {
+  Serial.println("PlutoPAD disconnected.");
+}
+
+void setup() {
+  Serial.begin(115200);
+  controller.begin("MyESP32Device", true); // Enable debug prints
+  controller.linkOnChange(onButtonChange);
+  controller.linkOnConnect(onConnect);
+  controller.linkOnDisconnect(onDisconnect);
+}
+
+void loop() {
+  controller.run();
+}
+```
+
