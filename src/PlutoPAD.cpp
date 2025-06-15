@@ -128,30 +128,29 @@ void PlutoPAD::checkConnection(void)
 // - If input is available, read and update button states
 void PlutoPAD::handleInput() 
 {
-    // Exit function if no client or new bluetooth available
+    // Exit function if no Client or new Bluetooth available
     if (!client_isConnected || serialBluetooth.available() < 2)  
         return;
 
-    // 1) read the 2‑byte packet once
-    uint16_t newRaw = 0;
-    serialBluetooth.readBytes((uint8_t*)&newRaw, sizeof(newRaw));
+    // Read the 2‑byte packet once
+    uint16_t newButtons = 0;
+    serialBluetooth.readBytes((uint8_t*)&newButtons, sizeof(newButtons));
 
-    // 2) stash the old value
-    uint16_t oldRaw = button.raw;
+    // Store the old button values
+    uint16_t oldButtons = button.raw;
 
-    // 3) update the raw bits once
-    button.raw = newRaw;
+    // Update with new button values
+    button.raw = newButtons;
 
-    // 4) for each bit that changed, update the bool and fire the callback
+    // For each bit (button) that changed, update the bool and fire the callback
     for (int i = 0; i < 16; i++) 
     {
-        bool prev = (oldRaw >> i) & 1;
-        bool curr = (newRaw >> i) & 1;
+        bool prev = (oldButtons >> i) & 1;
+        bool curr = (newButtons >> i) & 1;
         if (prev != curr) 
         {
             updateButtonState(i, curr);
-            if (buttonCallback) 
-                buttonCallback();
+            if (buttonCallback) buttonCallback();
         }
     }
 }
