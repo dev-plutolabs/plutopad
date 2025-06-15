@@ -100,6 +100,7 @@ Serial.println(PlutoPad.getButtonName(0)); // Prints "Centre B"
 ```
 
 **Or use the built-in accessors:**
+
 Button pressed:
 ```cpp
 if (PlutoPad.button.centre_b_pressed())
