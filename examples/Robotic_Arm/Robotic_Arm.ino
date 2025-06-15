@@ -1,7 +1,7 @@
 /**
  * Example sketch for using PlutoPAD.h controller library with a wireless ESP32 to control a 3-axis (servo) robotic arm.
  * 
- * This sketch demonstrates how to use the PlutoPAD.h library to connect to a PlutoPAD controller,
+ * This sketch demonstrates how the PlutoPAD.h library could be used to connect to a PlutoPAD controller,
  * respond to user button presses moving specific servo motors (open/close, up/down) to control the robotic arm.
  * 
  */
