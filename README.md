@@ -107,6 +107,13 @@ if (PlutoPad.button.centre_b_pressed())
   // do things....
 }
 ```
+```cpp
+if (PlutoPad.button.centre_b_released())
+{
+  // React to Centre B released
+  // do things....
+}
+```
 
 ---
 
